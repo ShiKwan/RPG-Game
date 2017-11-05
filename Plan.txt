@@ -1,0 +1,21 @@
+1. create object of characters
+	- atk power
+	- hp
+	- counter atk power
+	- skill
+	- class
+	- atk power multiplier
+	
+
+
+2. create object of gamePlay
+	- game mode
+	- win
+	- loss
+	- start
+
+3. create object of atk
+
+4. create object of def
+
+5. 
