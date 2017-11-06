@@ -4,6 +4,10 @@ var addUp = 0;
 var win = 0;
 var loss = 0;
 
+winSound = new Audio("assets/audio/win.mp3");
+loseSound = new Audio("assets/audio/lose.mp3")
+
+
 function getRandomNumber(min, max){
 	min = Math.ceil(min);
 	max = Math.floor(max);
@@ -26,7 +30,7 @@ function initializeGame(newNumber){
 
 function calculateWinLoss(){
 	$("#lblWin").text(win);
-	$("#lblLoss").text(loss);
+	$("#lblLose").text(loss);
 }
 
 $(document).ready(function(){
@@ -41,12 +45,14 @@ $(document).ready(function(){
 		if(parseInt(addUp) == parseInt(randomNumber)){
 			console.log("a == r : addUp = " + addUp + " , randomNumber = " + randomNumber);
 			console.log("You win");
+			winSound.play();
 			win++;
 			calculateWinLoss();
 			randomNumber = initializeGame(randomNumber);
 		}else if(parseInt(addUp) > parseInt(randomNumber)){
 			console.log("a > r : addUp = " + addUp + " , randomNumber = " + randomNumber);
 			console.log("You lose");
+			loseSound.play();
 			loss++;
 			calculateWinLoss();
 			randomNumber = initializeGame(randomNumber);

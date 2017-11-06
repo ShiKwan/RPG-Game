@@ -8,7 +8,7 @@
 
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<!-- <link rel="stylesheet" href="fanpage-style.css"> -->
+	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="icon" type="image/jpg" href="http://www.dalessandroegalli.com/images/events/thumbs/236.jpg?t=1452720982">
 
 </head>
@@ -21,24 +21,19 @@
 			
 			<div class="jumbotron">
 				<div class="row text-center">
-					<div class="col-md-4">
-						<button type="button" class="btn btn-primary">
-							Get <label id="lblRandom"></label>
-						</button>
-					</div>
-					<div class="col-md-4">
+
+					<div class="col-md-6 text-left">
 						<button type="button" class="btn btn-success">
 							Wins:<label id="lblWin"></label>
 						</button>
 					</div>
-					<div class="col-md-4">
-						
+					<div class="col-md-6 text-right">
 						<button type="button" class="btn btn-danger">
-							Losses:<label id="lblWin"></label>
+							Losses:<label id="lblLose"></label>
 						</button>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row card-container">
 					<div class="col-md-3">
 						<a href="#" class="thumbnail">
 						<img id="imgCard1" class="card card1" src="assets/images/card1.png" alt="card1">
@@ -60,7 +55,10 @@
 						</a>
 					</div>
 				</div>
-				<button type="button" class="btn btn-primary">Current points: <label id="lblCurrent"></label></button>
+				<div class="point-container text-right">
+					<button type="button" class="btn btn-primary">Current points: <label id="lblCurrent"></label></button>
+					<button type="button" class="btn btn-primary">Get: <label id="lblRandom"></label></button>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -8,11 +8,138 @@
 
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<!-- <link rel="stylesheet" href="fanpage-style.css"> -->
+	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="icon" type="image/jpg" href="http://www.dalessandroegalli.com/images/events/thumbs/236.jpg?t=1452720982">
 
 </head>
 <body>
+
+	<div class="wrapper">
+		<div class="container">
+			<div class="page-header">
+				<h1>RPG Game</h1>
+			</div>
+			<div id="msg-center" class="alert alert-info text-center" role="alert"> Test Alert</div>
+			<div class="jumbotron character-selection">
+				<div class="page-header"><h2>Select Your Hero</h2></div>
+				<div class="row">
+					<div class="col-sm-3">
+						<a id="hypChar0" href="#" class="thumbnail char" value="0">
+							<img src="" alt="">
+						</a>
+					</div>
+					<div class="col-sm-3">
+						<a id="hypChar1" href="#" class="thumbnail char"  value="1">
+							<img src="" alt="">
+						</a>
+					</div>
+					<div class="col-sm-3">
+						<a id="hypChar2" href="#" class="thumbnail char" value="2">
+							<img src="" alt="">
+						</a>
+					</div>
+					<div class="col-sm-3">
+						<a id="hypChar3" href="#" class="thumbnail char" value="3">
+							<img src="" alt="">
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<a id="hypChar4" href="#" class="thumbnail char" value="4">
+							<img src="" alt="">
+						</a>
+					</div>
+					<div class="col-sm-3">
+						<a id="hypChar5" href="#" class="thumbnail char" value="5">
+							<img src="" alt="">
+						</a>
+					</div>
+					<div class="col-sm-3">
+						<a id="hypChar6" href="#" class="thumbnail char" value="6">
+							<img src="" alt="">
+						</a>
+					</div>
+					<div class="col-sm-3">
+						<a id="hypChar7" href="#" class="thumbnail char" value="7">
+							<img src="" alt="">
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<a id="hypChar8" href="#" class="thumbnail char" value="8">
+							<img src="" alt="">
+						</a>
+					</div>
+					<div class="col-sm-3">
+						<a id="hypChar9" href="#" class="thumbnail char" value="9">
+							<img src="" alt="">
+						</a>
+					</div>
+					<div class="col-sm-3">
+						<a id="hypChar10" href="#" class="thumbnail char" value="10">
+							<img src="" alt="">
+						</a>
+					</div>
+					<div class="col-sm-3">
+						<a id="hypChar11" href="#" class="thumbnail char" value="11">
+							<img src="" alt="">
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<button id="btnHero" type="button" class="btn btn-success text-left">Lock In Your Hero</button>
+						<button id="btnOpponents" type="button" class="btn btn-success text-right">Lock In Your Opponents</button>
+					</div>
+				</div>
+			</div>
+			<div class="jumbotron fluid-container fight-scene">
+				<div class="page-header"><h2>Ready! Fight!</h2></div>
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="col-sm-3">
+						<a href="#" class="thumbnail char">
+							<img id="imgHero" class="hero fight-scene char" src="" alt="">
+						</a>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-sm-3">
+								<a href="#" class="thumbnail">
+									<img id="imgOpponent0" class="fight-opponent opponent0" src="" alt="">
+								</a>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-sm-3">
+								<a href="#" class="thumbnail">
+									<img id="imgOpponent1" class="fight-opponent opponent1" src="" alt="">
+								</a>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-sm-3">
+								<a href="#" class="thumbnail">
+									<img id="imgOpponent2" class="fight-opponent opponent2" src="" alt="">
+								</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+
+		</div>
+	</div>
 	
 	<!-- jQuery, javascript file for the Bootstrap's javascript file to function -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

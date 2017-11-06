@@ -1,0 +1,21 @@
+.card-container {
+	margin-top:25px;
+}
+
+.card {
+	opacity: 0.7;
+	transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}
+
+.card:hover {
+	opacity: 1;
+}
+
+.jumbotron {
+	background: url(../images/background.png);
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

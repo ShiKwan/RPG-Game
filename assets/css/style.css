@@ -1,0 +1,31 @@
+.wrapper{
+	background:grey;
+}
+h1{
+	color:white;
+}
+.character-selection{
+	background: url(../images/selection.jpg);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.character-selection .page-header {
+	color: white;
+}
+
+.fluid-container.fight-scene{
+	background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: bottom !important;
+}
+
+.hero-selected{
+	background: green;
+	border: solid green 1px;
+}
+.opponent-selected {
+	background: red;
+	border: solid red 1px;
+}
