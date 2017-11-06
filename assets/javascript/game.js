@@ -15,6 +15,10 @@ console.log(hero);
 return hero;
 }
 
+if($("#btnOpponents").css("display") != "none" && $("#btnHero").css("display") != "none"){
+	$(".fight-scene").hide();
+}
+
 //click on hero
 	$(".char").on("click", function(){
 		if($.isEmptyObject(hero) && $("#btnHero").css("display") !== "none"){
@@ -55,15 +59,23 @@ $("#btnHero").on("click",function(){
 
 $("#btnOpponents").on("click", function(){
 	$(".char").each(function(i){
-
 		if($(this).hasClass("opponent-selected")){
 			console.log($(this));
 			console.log("getting all the IDs.. " + $(this).attr("value"));
 			opponents.push($(this).attr("value"));
 		}
+		$("#btnOpponents").hide();
+		if($("#btnOpponents").css("display") == "none" && $("#btnHero").css("display") == "none"){
+			$(".character-selection").slideUp();
+			pickRandomScene();
+			$(".fight-scene").show();
+			$(".fight-scene").slideDown();
+		} 
 	})
 	console.log("log all opponents " + opponents);
 })
+
+
 
 console.log("before selection: opponent is.. " + opponents);
 

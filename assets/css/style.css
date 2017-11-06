@@ -24,8 +24,10 @@ h1{
 .hero-selected{
 	background: green;
 	border: solid green 1px;
+	animation: blink .5s step-end infinite alternate;
 }
 .opponent-selected {
 	background: red;
 	border: solid red 1px;
+	animation: blink .5s step-end infinite alternate;
 }
