@@ -21,13 +21,34 @@ h1{
     background-position: bottom !important;
 }
 
-.hero-selected{
-	background: green;
-	border: solid green 1px;
+.hero-selected, .hero-selected:active, .hero-selected:hover, .hero-selected:focus, a.hero-selected.thumbnail.active, a.hero-selected.thumbnail:focus, a.hero-selected.thumbnail:hover{
+	border: solid green 3px;
+	color: green;
 	animation: blink .5s step-end infinite alternate;
 }
-.opponent-selected {
-	background: red;
-	border: solid red 1px;
+.opponent-selected, .opponent-selected:active, .opponent-selected:hover, .opponent-selected:focus, a.opponent-selected.thumbnail.active, a.opponent-selected.thumbnail:focus, a.opponent-selected.thumbnail:hover{
+	border: solid red 3px;
+	color: red;
 	animation: blink .5s step-end infinite alternate;
+}
+
+.img-char {
+	opacity: 0.7;
+	transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}
+
+.img-char:hover {
+	opacity: 1;
+}
+
+label.char-name {
+	display: block;
+	text-align: center;
+}
+
+.ko{
+	opacity: 0.4;
+    filter: alpha(opacity=40); /* msie */
 }
