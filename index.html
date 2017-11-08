@@ -13,14 +13,164 @@
 
 </head>
 <body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid clearfix">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		    <span class="sr-only">Toggle navigation</span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="#">RPG Game</a>
+		</div>
 
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <ul class="nav navbar-nav">
+		    <li class="active"><a href="index.html">Game <span class="sr-only">(current)</span></a></li>
+		  </ul>
+		  <ul class="nav navbar-nav navbar-right">
+		  	<li><a id="navAudio" class="play" href="#">
+			  		<span id="audio_on" class="glyphicon glyphicon-volume-down " aria-hidden="true"></span>
+			  		<span id="audio_mute" class="glyphicon glyphicon glyphicon-volume-off" aria-hidden="true"></span>
+		  			Audio
+		  	</a>
+		  </li>
+		    <li><a href="instruction.html"><span class="glyphicon glyphicon-wrench " aria-hidden="true"></span> Instruction</a></li>
+		  </ul>
+		</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
 	<div class="wrapper">
 		<div class="container">
 			<div class="page-header">
 				<h1>Super Hero Smash Bros</h1>
 			</div>
+
 			<div id="msg-center" class="alert alert-info text-center" role="alert"></div>
-			<div class="jumbotron character-selection">
+			<div class="character-selection jumbotron"> <!-- character generated dynamically in the back end -->
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<button id="btnHero" type="button" class="btn btn-success text-left">Lock In Your Hero</button>
+						<button id="btnOpponents" type="button" class="btn btn-danger text-right">Lock In Your Opponents</button>
+					</div>
+				</div>
+			</div>
+			
+			<div class="jumbotron fluid-container fight-scene">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="col-sm-4">
+						
+						</div>
+						<div class="col-sm-4">
+						<a href="#" class="thumbnail char">
+							<div class="progress hero-hp">
+								<div class="progress-bar progress-bar-success hero-progress-hp" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+									<span class="sr-only">100% Complete</span>
+								</div>
+							</div>
+							<img id="imgHero" class="hero fight-scene char" src="" alt=""><br />
+							<button id="cmdAttack" type="button" class="btn btn-danger">Attack!</button>
+						</a>
+						</div>
+						<div class="col-sm-4">
+							
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="row oppo0_row">
+							<div class="col-lg-4">
+								<div class="col-sm-12">
+								
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="col-sm-12">
+								<a href="#" class="thumbnail">
+									<div class="progress oppo0-hp">
+										<div class="progress-bar progress-bar-success imgOpponent0 oppo0-progress-hp" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+											<span class="sr-only">100% Complete</span>
+										</div>
+									</div>
+									<img id="imgOpponent0" class="fight-opponent opponent0" src="" alt="">
+								</a>
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="col-sm-12">
+								
+								</div>
+							</div>
+						</div>
+						<div class="row oppo1_row">
+							<div class="col-lg-4">
+								<div class="col-sm-12">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="col-sm-12">
+								<a href="#" class="thumbnail">
+									<div class="progress oppo1-hp">
+										<div class="progress-bar progress-bar-success imgOpponent1 oppo1-progress-hp" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+											<span class="sr-only">100% Complete</span>
+										</div>
+									</div>
+									<img id="imgOpponent1" class="fight-opponent opponent1" src="" alt="">
+								</a>
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="col-sm-12">
+									
+								</div>
+							</div>
+						</div>
+						<div class="row oppo2_row">
+							<div class="col-lg-4">
+								<div class="col-sm-12">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="col-sm-12">
+								<a href="#" class="thumbnail">
+									<div class="progress oppo2-hp">
+										<div class="progress-bar progress-bar-success imgOpponent2 oppo2-progress-hp" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+											<span class="sr-only">100% Complete</span>
+										</div>
+									</div>
+									<img id="imgOpponent2" class="fight-opponent opponent2" src="" alt="">
+								</a>
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="col-sm-12">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>				
+			</div>
+
+		</div>
+	</div>
+	
+	<!-- jQuery, javascript file for the Bootstrap's javascript file to function -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="assets/javascript/game.js"> </script>
+</body>
+</html>
+
+
+
+
+
+<!-- <div class="jumbotron character-selection">
 				<div class="row">
 					<div class="col-sm-2">
 						<a id="hypChar0" href="#" class="thumbnail char" value="0">
@@ -212,116 +362,5 @@
 						</a>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-sm-12 text-center">
-						<button id="btnHero" type="button" class="btn btn-success text-left">Lock In Your Hero</button>
-						<button id="btnOpponents" type="button" class="btn btn-success text-right">Lock In Your Opponents</button>
-					</div>
-				</div>
-			</div>
-			<div class="jumbotron fluid-container fight-scene">
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="col-sm-4">
-						
-						</div>
-						<div class="col-sm-4">
-						<a href="#" class="thumbnail char">
-							<div class="progress hero-hp">
-								<div class="progress-bar progress-bar-success hero-progress-hp" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-									<span class="sr-only">100% Complete</span>
-								</div>
-							</div>
-							<img id="imgHero" class="hero fight-scene char" src="" alt=""><br />
-							<button id="cmdAttack" type="button" class="btn btn-danger">Attack!</button>
-						</a>
-						</div>
-						<div class="col-sm-4">
-							
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="row oppo0_row">
-							<div class="col-lg-4">
-								<div class="col-sm-12">
-								
-								</div>
-							</div>
-							<div class="col-lg-4">
-								<div class="col-sm-12">
-								<a href="#" class="thumbnail">
-									<div class="progress oppo0-hp">
-										<div class="progress-bar progress-bar-success imgOpponent0 oppo0-progress-hp" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-											<span class="sr-only">100% Complete</span>
-										</div>
-									</div>
-									<img id="imgOpponent0" class="fight-opponent opponent0" src="" alt="">
-								</a>
-								</div>
-							</div>
-							<div class="col-lg-4">
-								<div class="col-sm-12">
-								
-								</div>
-							</div>
-						</div>
-						<div class="row oppo1_row">
-							<div class="col-lg-4">
-								<div class="col-sm-12">
-								</div>
-							</div>
-							<div class="col-lg-4">
-								<div class="col-sm-12">
-								<a href="#" class="thumbnail">
-									<div class="progress oppo1-hp">
-										<div class="progress-bar progress-bar-success imgOpponent1 oppo1-progress-hp" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-											<span class="sr-only">100% Complete</span>
-										</div>
-									</div>
-									<img id="imgOpponent1" class="fight-opponent opponent1" src="" alt="">
-								</a>
-								</div>
-							</div>
-							<div class="col-lg-4">
-								<div class="col-sm-12">
-									
-								</div>
-							</div>
-						</div>
-						<div class="row oppo2_row">
-							<div class="col-lg-4">
-								<div class="col-sm-12">
-								</div>
-							</div>
-							<div class="col-lg-4">
-								<div class="col-sm-12">
-								<a href="#" class="thumbnail">
-									<div class="progress oppo2-hp">
-										<div class="progress-bar progress-bar-success imgOpponent2 oppo2-progress-hp" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-											<span class="sr-only">100% Complete</span>
-										</div>
-									</div>
-									<img id="imgOpponent2" class="fight-opponent opponent2" src="" alt="">
-								</a>
-								</div>
-							</div>
-							<div class="col-lg-4">
-								<div class="col-sm-12">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>				
-			</div>
-
-		</div>
-	</div>
-	
-	<!-- jQuery, javascript file for the Bootstrap's javascript file to function -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script src="assets/javascript/game.js"> </script>
-</body>
-</html>
+				
+			 </div>-->

@@ -5,13 +5,33 @@
 h1{
 	color:white;
 }
-.character-selection{
+#audio_on {
+	display: inline;
+}
+#audio_mute {
+	display: none;
+}
+
+.character-selection, .character-selection-2{
 	background: url(../images/selection.jpg);
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 }
+.character-selection .img-container{
+	max-width:12%;
+	max-height:10%;
+	display: inline-block;
+	margin: 1% 2% 0% 2%;
+}
 
+.character-selection .img-container label {
+	background: white;
+}
+
+.character-selection .img-container .thumbnail {
+	margin-bottom:10px;
+}
 .character-selection .page-header {
 	color: white;
 }
@@ -20,6 +40,7 @@ h1{
 	background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: bottom !important;
+    min-height: 50vh;
 }
 
 .hero-selected, .hero-selected:active, .hero-selected:hover, .hero-selected:focus, a.hero-selected.thumbnail.active, a.hero-selected.thumbnail:focus, a.hero-selected.thumbnail:hover{
@@ -56,7 +77,17 @@ label.char-name {
 	opacity: 0.4;
     filter: alpha(opacity=40); /* msie */
 }
+.shake {
 
+	animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+	transform : translate3d(0, 0, 0);
+	backface-visibility : hidden;
+	perspective: 1000px
+}
+
+.koBackground{
+	background: url(../images/ko.gif);
+}
 
 @keyframes shake {
   10%, 90% {
