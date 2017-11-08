@@ -66,6 +66,7 @@ $(document).ready(function(){
 				}
 			}
 		}
+		return false;
 	})	
 
 	//lock in user's hero
@@ -100,6 +101,7 @@ $(document).ready(function(){
 				$(".fight-scene").slideDown();
 			}
 			$("#msg-center").addClass("alert-success").removeClass("alert-danger");
+			$("#cmdAttack").hide();
 			console.log("log all opponents " + opponents);
 			$("#imgOpponent0").attr("src", "assets/images/" + charList[opponents[0]].img);
 			$("#imgOpponent0").attr("data-value", charList[opponents[0]].id);
@@ -110,6 +112,7 @@ $(document).ready(function(){
 			$("#msg-center").html("Select your first opponent!");
 		}
 		})
+		return false;
 	})
 
 
@@ -154,10 +157,27 @@ $(".fight-opponent").on("click", function(){
 		}
 	}
 	opponentLeft--;	
+	$("#cmdAttack").show();
+	return false;
 })
+
+let previousShake;
+function shake() {
+	if(previousShake) clearTimeout(previousShake)
+previousShake = setTimeout(function() {
+		$(htmlID).removeClass('shake')
+	}, 0.82 * 1000)
+}
 
 $("#cmdAttack").on("click", function(){
 	currentOpponent = charList[currentOpponentID];
+	$(htmlID).css({"animation": "shake 0.82s cubic-bezier(.36,.07,.19,.97) both", 
+				"transform" : "translate3d(0, 0, 0)",
+  				"backface-visibility": "hidden",
+  				"perspective": "1000px"});
+
+	
+	$(htmlID).css("background-color", "");
 	if(currentOpponent.hp > 0){
 		hitSound.play();
 		console.log("hero hp before counter: " + hero.hp);
@@ -193,13 +213,15 @@ $("#cmdAttack").on("click", function(){
 			$("#msg-center").html();	
 			$(htmlID).addClass("ko");
 			$(htmlID).attr("disabled", "disabled");
-
+			$(htmlID).off();
+			$("#cmdAttack").hide();
 			$(".oppo0_row").show();
 			$(".oppo1_row").show();
 			$(".oppo2_row").show();
 		}
 
 	}
+	return false;
 })
 
 function progressBarHP(characterID, current, base){
