@@ -51,7 +51,6 @@ $(document).ready(function(){
 
 	if($("#btnHero").css("display") !="none"){
 		$("#msg-center").addClass("alert-success");
-		$("#msg-center").html("Select your favorite hero and lock in!");
 	}
 	//click on hero
 	$(document).on("click", '.char', function(){
@@ -100,10 +99,13 @@ $(document).ready(function(){
 			console.log("inside btnHero click, isemptyobject " + $.isEmptyObject(hero))
 			$("imgHero").attr("src", "../images/" + hero.img );
 			$("#btnHero").hide();
+			$("#msg-center").show();
 			$("#msg-center").removeClass("alert-success").addClass("alert-danger");
 			$("#msg-center").html("Select <b>three</b> opponents you want to fight against and lock in!");
 			$("#imgHero").attr("src", "assets/images/" + hero.img);
 		}else {
+			$("#msg-center").show();
+			$("#msg-center").html("Select your favorite hero and lock in!");
 			shake($(this));
 		}
 		
@@ -143,8 +145,8 @@ $(document).ready(function(){
 					$("#msg-center").html("Select your first opponent!");
 				}else{
 					$("#msg-center").addClass("alert-danger").removeClass("alert-success").removeClass("alert-warning");
-					$("#msg-center").html("Select your hero first!");
-					shake($(this));
+					$("#msg-center").html("Select your favorite hero first before locking in your opponents!");
+					shake($("#btnOpponents"));
 				}
 			})
 			return false;
@@ -161,7 +163,6 @@ $(document).on("click", ".fight-opponent", function(){
 	if(opponentLeft >0){
 		currentOpponentID = $(this).attr("data-value");
 		htmlID = "#"+$(this).attr("ID");
-		console.log("html ID " + htmlID);
 
 		if($(htmlID).hasClass("opponent0")){
 			$(".oppo1_row").hide();
@@ -191,7 +192,6 @@ $(document).on("click", ".fight-opponent", function(){
 				opp3_catk = charList[currentOpponentID].counter;
 				console.log("third opponent selected! " + charList[currentOpponentID].name);
 			}
-			console.log("fight opponent selected: " + $(this).attr("data-value"));
 			counter--;
 		}
 	}
@@ -206,19 +206,14 @@ $("#cmdAttack").on("click", function(){
 	console.log(currentOpponent);
 	if(currentOpponent.hp > 0){
 		hitSound[(Math.floor(Math.random() * hitSound.length))].play();
-		console.log("hero hp before counter: " + hero.hp);
 		hero.hp -= currentOpponent.counter;
-		console.log("hero hp after counter: " + hero.hp);
-		console.log("opponent hp before atk" + currentOpponent.hp);
 		currentOpponent.hp -= hero.ap;
-		console.log("opponent hp after atk" +  currentOpponent.hp);
-		console.log("hero ap before increment:" + hero.ap);
 		hero.ap += hero.increment;
-		console.log("hero ap after increment:" + hero.ap);
 		var targetOpponent = "."+htmlID.substring(1)+".progress-bar";
 		progressBarHP($(".hero-progress-hp"), hero.hp, heroBaseHP);
-		console.log("in cmdatk   :  " + targetOpponent);
 		progressBarHP($(targetOpponent),  currentOpponent.hp, oppoBaseHP);
+		console.log(hero);
+		console.log(currentOpponent);
 	}
 
 	if($.isEmptyObject(currentOpponent) == false){
@@ -238,27 +233,27 @@ $("#cmdAttack").on("click", function(){
 					$(".oppo2_row").show();
 				}
 				if(opponentLeft == 2){
-				$("#msg-center").html("ko! select your second opponent!");
+				$("#msg-center").html("<h1>ko!</h1> select your second opponent!");
 				}else if(opponentLeft == 1){
-					$("#msg-center").html("pick your last opponent!");
+					$("#msg-center").html("<h1>ko!</h1>pick your last opponent!");
 				}else if(opponentLeft == 0){
 					if(hero.hp >0){
 						$("msg-center").addClass("alert-success").removeClass("alert-danger").removeClass("alert-warning");
-						$("#msg-center").html("You win!! <br /> Press '<b>y</b>' to fight the same opponent again, '<b>r</b>' to back to character selection");
+						$("#msg-center").html("<h1>You win!!</h1> Press '<b>y</b>' to fight the same opponent again, '<b>r</b>' to back to character selection");
 						resetGame();
 					}
 				}
 			}else if(hero.hp <= 0) {
 				koSound.play();
 				$("#cmdAttack").hide();
-				$("#msg-center").html("You die kamizake style! <br /> Press '<b>y</b>' to fight the same opponent again, '<b>r</b>' to back to character selection");
+				$("#msg-center").html("<h1>You die kamizake style!</h1> Press '<b>y</b>' to fight the same opponent again, '<b>r</b>' to back to character selection");
 				resetGame();
 			}
 		}else if(currentOpponent.hp >0){
 			 if(hero.hp <= 0){
 				koSound.play();
 				$("#cmdAttack").hide();
-				$("#msg-center").html("You lose.. <br /> Press '<b>y</b>' to fight the same opponent again, '<b>r</b>' to back to character selection");
+				$("#msg-center").html("<h1>You lose..</h1> Press '<b>y</b>' to fight the same opponent again, '<b>r</b>' to back to character selection");
 				resetGame();
 			}
 		}
@@ -641,7 +636,7 @@ newLbl.addClass("char-name name" + [i]);
 newLbl.html(charList[i].name);
 $(".character-selection").append(newDiv.append(newHyp.append(newImg).append(newLbl)));
 }
-
+$("#msg-center").hide();
 })
 
 
