@@ -29,7 +29,7 @@ $(document).ready(function(){
 			document.getElementById("navAudio").classList.remove('mute');
 			document.getElementById("audio_on").style.display = "inline";
 			document.getElementById("audio_mute").style.display = "none";
-			// backgroundMusic.play();	
+			backgroundMusic.play();	
 		}
 	}
 	$("#navAudio").click(pauseAudio);
@@ -53,8 +53,6 @@ $(document).ready(function(){
 		$("#msg-center").addClass("alert-success");
 		$("#msg-center").html("Select your favorite hero and lock in!");
 	}
-
-
 	//click on hero
 	$(document).on("click", '.char', function(){
 		console.log("here");
@@ -91,56 +89,69 @@ $(document).ready(function(){
 
 	//lock in user's hero
 	$("#btnHero").on("click",function(){
-		lockInSound.play();
-		hero = pickHero($(charID).attr("value"));
-		heroBaseHP = hero.hp;
-		heroBaseAP = hero.ap;
-		console.log("in btnHero click function: hero is ");
-		console.log(hero);
-		console.log("inside btnHero click, isemptyobject " + $.isEmptyObject(hero))
-		$("imgHero").attr("src", "../images/" + hero.img );
-		$("#btnHero").hide();
-		$("#msg-center").removeClass("alert-success").addClass("alert-danger");
-		$("#msg-center").html("Select <b>three</b> opponents you want to fight against and lock in!");
-		$("#imgHero").attr("src", "assets/images/" + hero.img)
+		if($(".char").hasClass("hero-selected")){
+			lockInSound.play();
+			$(charID).off();
+			hero = pickHero($(charID).attr("value"));
+			heroBaseHP = hero.hp;
+			heroBaseAP = hero.ap;
+			console.log("in btnHero click function: hero is ");
+			console.log(hero);
+			console.log("inside btnHero click, isemptyobject " + $.isEmptyObject(hero))
+			$("imgHero").attr("src", "../images/" + hero.img );
+			$("#btnHero").hide();
+			$("#msg-center").removeClass("alert-success").addClass("alert-danger");
+			$("#msg-center").html("Select <b>three</b> opponents you want to fight against and lock in!");
+			$("#imgHero").attr("src", "assets/images/" + hero.img);
+		}else {
+			shake($(this));
+		}
+		
 	});
 
 	$("#btnOpponents").on("click", function(){
 		if($.isEmptyObject(hero) == false){
-
 			$(".char").each(function(i){
 				if($(this).hasClass("opponent-selected")){
 					opponents.push($(this).attr("value"));
+				}else{
+					$("#msg-center").addClass("alert-danger").removeClass("alert-success").removeClass("alert-warning");
+					$("#msg-center").html("Select your hero first!");
+					shake($(this));
 				}
-				
 				if(opponents.length == 3){
-				lockInSound.play();
-				$("#btnOpponents").hide();
-				if($("#btnOpponents").css("display") == "none" && $("#btnHero").css("display") == "none"){
-					$(".character-selection").slideUp();
-					pickRandomScene();
-					$(".fight-scene").show();
-					$(".fight-scene").slideDown();
+					lockInSound.play();
+					$("#btnOpponents").hide();
+						if($("#btnOpponents").css("display") == "none" && $("#btnHero").css("display") == "none"){
+							$(".character-selection").slideUp();
+							pickRandomScene();
+							$(".fight-scene").show();
+							$(".fight-scene").slideDown();
+						}
+					$("#msg-center").addClass("alert-success").removeClass("alert-danger");
+					$("#cmdAttack").hide();
+					console.log("log all opponents " + opponents);
+					$("#imgOpponent0").attr("src", "assets/images/" + charList[opponents[0]].img);
+					$("#imgOpponent0").attr("data-value", charList[opponents[0]].id);
+					$("#imgOpponent0").attr("baseHP", charList[opponents[0]].hp);
+					$("#imgOpponent1").attr("src", "assets/images/" + charList[opponents[1]].img);
+					$("#imgOpponent1").attr("data-value", charList[opponents[1]].id);
+					$("#imgOpponent1").attr("baseHP", charList[opponents[1]].hp);
+					$("#imgOpponent2").attr("src", "assets/images/" + charList[opponents[2]].img);
+					$("#imgOpponent2").attr("data-value", charList[opponents[2]].id); 
+					$("#imgOpponent2").attr("baseHP", charList[opponents[2]].hp);
+					$("#msg-center").html("Select your first opponent!");
+				}else{
+					$("#msg-center").addClass("alert-danger").removeClass("alert-success").removeClass("alert-warning");
+					$("#msg-center").html("Select your hero first!");
+					shake($(this));
 				}
-				$("#msg-center").addClass("alert-success").removeClass("alert-danger");
-				$("#cmdAttack").hide();
-				console.log("log all opponents " + opponents);
-				$("#imgOpponent0").attr("src", "assets/images/" + charList[opponents[0]].img);
-				$("#imgOpponent0").attr("data-value", charList[opponents[0]].id);
-				$("#imgOpponent0").attr("baseHP", charList[opponents[0]].hp);
-				$("#imgOpponent1").attr("src", "assets/images/" + charList[opponents[1]].img);
-				$("#imgOpponent1").attr("data-value", charList[opponents[1]].id);
-				$("#imgOpponent1").attr("baseHP", charList[opponents[1]].hp);
-				$("#imgOpponent2").attr("src", "assets/images/" + charList[opponents[2]].img);
-				$("#imgOpponent2").attr("data-value", charList[opponents[2]].id); 
-				$("#imgOpponent2").attr("baseHP", charList[opponents[2]].hp);
-				$("#msg-center").html("Select your first opponent!");
-			}
 			})
 			return false;
 		}else{
+			$("#msg-center").addClass("alert-danger").removeClass("alert-success").removeClass("alert-warning");
 			$("#msg-center").html("Select your hero first!");
-			//add shake here
+			shake($(this));
 		}
 	})
 
@@ -166,8 +177,6 @@ $(document).on("click", ".fight-opponent", function(){
 			console.log("counter  back to 2");
 			if(counter == 2){
 				console.log("current opponent ID: " + currentOpponentID);
-
-
 				oppoBaseHP = charList[currentOpponentID].hp;
 				opp1_catk = charList[currentOpponentID].counter;
 				console.log("first opponent selected! " + charList[currentOpponentID].name);
@@ -191,16 +200,11 @@ $(document).on("click", ".fight-opponent", function(){
 	return false;
 })
 
-
-
 $("#cmdAttack").on("click", function(){
 	currentOpponent = charList[currentOpponentID];
 	shake($(htmlID));
 	console.log(currentOpponent);
-
-
 	if(currentOpponent.hp > 0){
-
 		hitSound[(Math.floor(Math.random() * hitSound.length))].play();
 		console.log("hero hp before counter: " + hero.hp);
 		hero.hp -= currentOpponent.counter;
@@ -216,68 +220,82 @@ $("#cmdAttack").on("click", function(){
 		console.log("in cmdatk   :  " + targetOpponent);
 		progressBarHP($(targetOpponent),  currentOpponent.hp, oppoBaseHP);
 	}
-	if($.isEmptyObject(currentOpponent) == false && currentOpponent.hp <= 0){
-			//koSound.play();
-			ko($(".fight-scene"));
-			if(opponentLeft == 2){
-				$("#msg-center").html("ko! select your second opponent!");
-			}else if(opponentLeft == 1){
-				$("#msg-center").html("pick your last opponent!");
-			}else if(opponentLeft == 0){
-				$("#msg-center").html("You won!! <a href='index.html'>Play again</a>?");
-				document.onkeyup = function(event) {
-					var userEnter = event.key.toLowerCase();
-					if(userEnter == "y"){
-						console.log("do something");
-						hero.hp = heroBaseHP;
-						hero.ap = heroBaseAP;
-						charList = [];
-						charList = originalList;
-						var oppo0ID = $("#imgOpponent0").attr("data-value");
-						var oppo1ID = $("#imgOpponent1").attr("data-value");
-						var oppo2ID = $("#imgOpponent2").attr("data-value");
-						charList[oppo0ID].hp = parseInt($("#imgOpponent0").attr("basehp"));
-						charList[oppo1ID].hp = parseInt($("#imgOpponent1").attr("basehp"));
-						charList[oppo2ID].hp = parseInt($("#imgOpponent2").attr("basehp"));
-						console.log(charList);
-						opponentLeft = 3;
-						counter = 2
-						$(".fight-opponent").removeClass("ko").on();
-						$(".progress-bar").css("width", "100%");
-						$(".progress-bar").addClass("progress-bar-success").removeClass("progress-bar-warning").removeClass("progress-bar-danger");
-						$("#cmdAttack").hide();
-						$(".oppo0_row").show();
-						$(".oppo1_row").show();
-						$(".oppo2_row").show();
-					}
-					$(document).unbind("keyup");
-				}
-				
 
+	if($.isEmptyObject(currentOpponent) == false){
+		ko($(".fight-scene"));
+		if(currentOpponent.hp <= 0){
+			if(hero.hp >0){
+				koSound.play();
+				if(opponentLeft <3){
+					console.log(currentOpponent.name + "is dead");
+					$("#msg-center").html();	
+					$(htmlID).addClass("ko");
+					//Help from TAs (Brian and Chris)
+					$(htmlID).off();
+					$("#cmdAttack").hide();
+					$(".oppo0_row").show();
+					$(".oppo1_row").show();
+					$(".oppo2_row").show();
+				}
+				if(opponentLeft == 2){
+				$("#msg-center").html("ko! select your second opponent!");
+				}else if(opponentLeft == 1){
+					$("#msg-center").html("pick your last opponent!");
+				}else if(opponentLeft == 0){
+					if(hero.hp >0){
+						$("msg-center").addClass("alert-success").removeClass("alert-danger").removeClass("alert-warning");
+						$("#msg-center").html("You win!! <br /> Press '<b>y</b>' to fight the same opponent again, '<b>r</b>' to back to character selection");
+						resetGame();
+					}
+				}
+			}else if(hero.hp <= 0) {
+				koSound.play();
+				$("#cmdAttack").hide();
+				$("#msg-center").html("You die kamizake style! <br /> Press '<b>y</b>' to fight the same opponent again, '<b>r</b>' to back to character selection");
+				resetGame();
 			}
-		if(opponentLeft <3){
-			console.log(currentOpponent.name + "is dead");
-			$("#msg-center").html();	
-			$(htmlID).addClass("ko");
-			//Help from TAs (Brian and Chris)
-			$(htmlID).off();
+		}else if(currentOpponent.hp >0){
+			 if(hero.hp <= 0){
+				koSound.play();
+				$("#cmdAttack").hide();
+				$("#msg-center").html("You lose.. <br /> Press '<b>y</b>' to fight the same opponent again, '<b>r</b>' to back to character selection");
+				resetGame();
+			}
+		}
+	return false;
+}
+})
+
+function resetGame(){
+	document.onkeyup = function(event) {
+		var userEnter = event.key.toLowerCase();
+		if(userEnter == "y"){
+			hero.hp = heroBaseHP;
+			hero.ap = heroBaseAP;
+			var oppo0ID = $("#imgOpponent0").attr("data-value");
+			var oppo1ID = $("#imgOpponent1").attr("data-value");
+			var oppo2ID = $("#imgOpponent2").attr("data-value");
+			charList[oppo0ID].hp = parseInt($("#imgOpponent0").attr("basehp"));
+			charList[oppo1ID].hp = parseInt($("#imgOpponent1").attr("basehp"));
+			charList[oppo2ID].hp = parseInt($("#imgOpponent2").attr("basehp"));
+			console.log(charList);
+			opponentLeft = 3;
+			counter = 2
+			$(".fight-opponent").removeClass("ko").on();
+			$(".progress-bar").css("width", "100%");
+			$(".progress-bar").addClass("progress-bar-success").removeClass("progress-bar-warning").removeClass("progress-bar-danger");
 			$("#cmdAttack").hide();
 			$(".oppo0_row").show();
 			$(".oppo1_row").show();
 			$(".oppo2_row").show();
+			$("#msg-center").html("Select your first opponent!");
+		}else if(userEnter == "r"){
+			location.reload();
 		}
+		$(document).unbind("keyup");
 	}
-	if(currentOpponent.hp <= 0 && hero.hp <= 0) {
-		//koSound.play();
-		$("#msg-center").html("You die kamizake style");
-	}
-	if(hero.hp <= 0 && currentOpponent.hp > 0){
-			//koSound.play();
-		$("#msg-center").html("You dead, <a href='index.html'>play again?</a>");
 
-	}
-	return false;
-})
+}
 
 function progressBarHP(characterID, current, base){
 	var progressBar = ((current)/base) * 100;
@@ -290,14 +308,12 @@ function progressBarHP(characterID, current, base){
 	}
 }
 
-
-
 const char0 = {
 	name : "deadpool",
 	img : "char0.png",
-	ap : 5,
+	ap : 4,
 	increment : 2,
-	hp : 100,
+	hp : 130,
 	counter: 5,
 	id : 0
 }
@@ -305,30 +321,30 @@ const char0 = {
 const char1 = {
 	name : "captain fury",
 	img : "char1.png",
-	ap : 5,
-	increment : 2,
+	ap : 4,
+	increment :5,
 	hp : 100,
-	counter: 5,
+	counter:9,
 	id : 1
 }
 
 const char2 = {
 	name : "hellboy",
 	img : "char2.png",
-	ap : 5,
+	ap : 4,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 145,
+	counter: 6,
 	id : 2
 }
 
 const char3 = {
 	name : "captain america",
 	img : "char3.png",
-	ap : 5,
+	ap : 6,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 140,
+	counter: 8,
 	id : 3
 }
 
@@ -337,17 +353,17 @@ const char4 = {
 	img : "char4.png",
 	ap : 5,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 114,
+	counter: 9,
 	id : 4
 }
 
 const char5 = {
 	name : "leonardo",
 	img : "char5.png",
-	ap : 5,
+	ap : 4,
 	increment : 2,
-	hp : 100,
+	hp : 130,
 	counter: 5,
 	id : 5
 }
@@ -355,30 +371,30 @@ const char5 = {
 const char6 = {
 	name : "michelangelo",
 	img : "char6.png",
-	ap : 5,
-	increment : 2,
+	ap : 4,
+	increment :5,
 	hp : 100,
-	counter: 5,
+	counter:9,
 	id : 6
 }
 
 const char7 = {
 	name : "raphael",
 	img : "char7.png",
-	ap : 5,
+	ap : 4,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 145,
+	counter: 6,
 	id : 7
 }
 
 const char8 = {
 	name : "donatello",
 	img : "char8.png",
-	ap : 5,
+	ap : 6,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 140,
+	counter: 8,
 	id : 8
 }
 
@@ -387,8 +403,8 @@ const char9 = {
 	img : "char9.png",
 	ap : 5,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 114,
+	counter: 9,
 	id : 9
 }
 
@@ -396,9 +412,9 @@ const char9 = {
 const char10 = {
 	name : "thor",
 	img : "char10.png",
-	ap : 5,
+	ap : 4,
 	increment : 2,
-	hp : 100,
+	hp : 130,
 	counter: 5,
 	id : 10
 }
@@ -407,10 +423,10 @@ const char10 = {
 const char11 = {
 	name : "cthulhu",
 	img : "char11.png",
-	ap : 5,
-	increment : 2,
+	ap : 4,
+	increment :5,
 	hp : 100,
-	counter: 5,
+	counter:9,
 	id : 11
 }
 
@@ -418,20 +434,20 @@ const char11 = {
 const char12 = {
 	name : "manhattan",
 	img : "char12.png",
-	ap : 5,
+	ap : 4,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 145,
+	counter: 6,
 	id : 12
 }
 
 const char13 = {
 	name : "rorachach",
 	img : "char13.png",
-	ap : 5,
+	ap : 6,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 140,
+	counter: 8,
 	id : 13
 }
 
@@ -440,17 +456,17 @@ const char14 = {
 	img : "char14.png",
 	ap : 5,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 114,
+	counter: 9,
 	id : 14
 }
 
 const char15 = {
 	name : "shrek",
 	img : "char15.png",
-	ap : 5,
+	ap : 4,
 	increment : 2,
-	hp : 100,
+	hp : 130,
 	counter: 5,
 	id : 15
 }
@@ -458,39 +474,39 @@ const char15 = {
 const char16 = {
 	name : "terminator",
 	img : "char16.png",
-	ap : 5,
-	increment : 2,
+	ap : 4,
+	increment :5,
 	hp : 100,
-	counter: 5,
+	counter:9,
 	id : 16
 }
 
 const char17 = {
 	name : "captain jack",
 	img : "char17.png",
-	ap : 5,
+	ap : 4,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 145,
+	counter: 6,
 	id : 17
 }
 
 const char18 = {
 	name : "green lantern",
 	img : "char18.png",
-	ap : 5,
+	ap : 6,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 140,
+	counter: 8,
 	id : 18
 }
 
 const char19 = {
 	name : "star lord",
 	img : "char19.png",
-	ap : 5,
+	ap : 4,
 	increment : 2,
-	hp : 100,
+	hp : 130,
 	counter: 5,
 	id : 19
 }
@@ -498,30 +514,30 @@ const char19 = {
 const char20 = {
 	name : "groot",
 	img : "char20.png",
-	ap : 5,
-	increment : 2,
+	ap : 4,
+	increment :5,
 	hp : 100,
-	counter: 5,
+	counter:9,
 	id : 20
 }
 
 const char21 = {
 	name : "rocket",
 	img : "char21.png",
-	ap : 5,
+	ap : 4,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 145,
+	counter: 6,
 	id : 21
 }
 
 const char22 = {
 	name : "drax",
 	img : "char22.png",
-	ap : 5,
+	ap : 6,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 140,
+	counter: 8,
 	id : 22
 }
 
@@ -530,46 +546,46 @@ const char23 = {
 	img : "char23.png",
 	ap : 5,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 114,
+	counter: 9,
 	id : 23
 }
 
 const char24 = {
 	name : "lecter",
 	img : "char24.png",
-	ap : 5,
+	ap : 4,
 	increment : 2,
-	hp : 100,
+	hp : 130,
 	counter: 5,
 	id : 24
 }
 const char25 = {
 	name : "bruce lee",
 	img : "char25.png",
-	ap : 5,
-	increment : 2,
+	ap : 4,
+	increment :5,
 	hp : 100,
-	counter: 5,
+	counter:9,
 	id : 25
 }
 
 const char26 = {
 	name : "chewbacca",
 	img : "char26.png",
-	ap : 5,
+	ap : 4,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 145,
+	counter: 6,
 	id : 26
 }
 const char27 = {
 	name : "han",
 	img : "char27.png",
-	ap : 5,
+	ap : 6,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 140,
+	counter: 8,
 	id : 27
 }
 const char28 = {
@@ -577,16 +593,16 @@ const char28 = {
 	img : "char28.png",
 	ap : 5,
 	increment : 2,
-	hp : 100,
-	counter: 5,
+	hp : 114,
+	counter: 9,
 	id : 28
 }
 const char29 = {
 	name : "trevor",
 	img : "char29.png",
-	ap : 5,
+	ap : 4,
 	increment : 2,
-	hp : 100,
+	hp : 130,
 	counter: 5,
 	id : 29
 }
@@ -595,10 +611,9 @@ backgroundMusic.addEventListener('ended', function() {
     this.currentTime = 0;
     this.play();
 }, false);
-//backgroundMusic.play();	
+backgroundMusic.play();	
 
 charList.push(char0, char1, char2, char3, char4, char5, char6, char7, char8, char9, char10, char11, char12, char13, char14, char15, char16, char17, char18, char19, char20, char21, char22, char23, char24, char25, char26, char27, char28, char29);
-originalList.push(char0, char1, char2, char3, char4, char5, char6, char7, char8, char9, char10, char11, char12, char13, char14, char15, char16, char17, char18, char19, char20, char21, char22, char23, char24, char25, char26, char27, char28, char29);
 for(var i = 0; i < charList.length; i++){
 var newDiv = $("<div>");
 var newHyp = $("<a></a>");
@@ -646,8 +661,6 @@ function ko(idtoUse){
 		previousUse = setTimeout(function(){
 		$(idtoUse).removeClass("koBackground")}, 2*1000)
 }
-
-
 
 /*
 <a id="hypChar0" href="#" class="thumbnail char" value="0">

@@ -72,7 +72,9 @@ label.char-name {
 	display: block;
 	text-align: center;
 }
-
+.attack-button-container{
+	text-align: -webkit-center;
+}
 .ko{
 	opacity: 0.4;
     filter: alpha(opacity=40); /* msie */
