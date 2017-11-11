@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>RPG Game- SK Bootcamp Project</title>
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="icon" type="image/jpg" href="http://www.dalessandroegalli.com/images/events/thumbs/236.jpg?t=1452720982">
+	<link href="https://fonts.googleapis.com/css?family=Aldrich|Concert+One" rel="stylesheet">
+</head>
+<body>
+	
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid clearfix">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		    <span class="sr-only">Toggle navigation</span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="#">RPG Game</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <ul class="nav navbar-nav">
+		    <li class="active"><a href="index.html">Game <span class="sr-only">(current)</span></a></li>
+		  </ul>
+		  <ul class="nav navbar-nav navbar-right">
+		  	<li><a id="navAudio" class="play" href="#">
+			  		<span id="audio_on" class="glyphicon glyphicon-volume-down " aria-hidden="true"></span>
+			  		<span id="audio_mute" class="glyphicon glyphicon glyphicon-volume-off" aria-hidden="true"></span>
+		  			Audio
+		  	</a>
+		  </li>
+		    <li><a href="instruction.html"><span class="glyphicon glyphicon-wrench " aria-hidden="true"></span> Instruction</a></li>
+		  </ul>
+		</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+	<div class="wrapper">
+		<div id="msg-center" class="alert text-center" role="alert"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<h2>Super Hero Smash Bros</h2>
+				</div>
+			</div>
+				<div class="jumbotron">
+					<div>
+
+						<h1>Game Play Instruction</h1>
+						<ol>
+							<li>Turn on your speaker!</li>
+							<li>Start the game by first selecting your own character (selected character will be highlighted with green border)</li>
+							<li>Lock in your character by clicking green button "Lock in your hero"</li>
+							<li>Then select three DIFFERENT opponents to fight against (selected opponents will be highlighted with red border)</li>
+							<li>Lock in your opponents by clicking red button "Lock in your opponents"</li>
+							<li>You will be redirect to random fighting background scene!</li>
+							<li>Select your first opponent and trash him/her by clicking the "Attack" button below your hero</li>
+							<li>KO! you will then choose your second opponent and then your third. </li>
+							<li>After beating ALL opponents or lost to your opponents, you can choose to try again by typing '<b>Y</b>' or pick a different hero and opponents by typing '<b>R</b>'</li>
+						</ol>
+						
+						Getting annoyed by background music? Turn it off by clicking "Audio" on the top right corner in navigation menu. 
+						<br />Click on "<a href="index.html" target="_blank">Game</a>" in the top left corner in navigation menu to play! 
+						<br />
+						<br />
+						<br />
+						Notes: Thanks to Chris and Brian for helping me out on getting the shake function to work, and also turn off the click event listener! Balancing the character is the worst thing especially for so many characters, therefore, i have 5 different stats on all characters, some characters will win against all opponents no matter what order, double ko might happens.. 
+
+
+					</div>
+				</div>
+				<div class="row guess-container jumbotron">
+					<div class="col-lg-12">
+						<h1>Tips for Instructor/TA:</h1>
+							<p>	
+								For grading purpose: please select these character:<br />
+								<div class="row">
+									<div class="col-lg-4">
+										<h2 class="hero">Hero: </h2>
+										<img class="thumbnail instruction hero-selected" src="assets/images/char3.png" /> <br />
+									</div>
+									<div class="col-log-8">
+										<h2 class="opponents">Opponents: </h2>	
+										<img class="thumbnail instruction opponent-selected" src="assets/images/char1.png" />
+										<img class="thumbnail instruction opponent-selected" src="assets/images/char2.png" />
+										<img class="thumbnail instruction opponent-selected" src="assets/images/char4.png" />
+									</div>
+								</div>
+								<hr>
+								<h2>Winning order:</h2>
+								<img class="thumbnail instruction opponent-selected" src="assets/images/char2.png" /> ->
+								<img class="thumbnail instruction opponent-selected" src="assets/images/char1.png" /> ->
+								<img class="thumbnail instruction opponent-selected" src="assets/images/char4.png" />
+								<h2>Losing order:</h2> 
+								<img class="thumbnail instruction opponent-selected" src="assets/images/char4.png" /> ->
+								<img class="thumbnail instruction opponent-selected" src="assets/images/char1.png" /> ->
+								<img class="thumbnail instruction opponent-selected" src="assets/images/char2.png" />
+								<h2>Suicide order:</h2> 
+								<img class="thumbnail instruction opponent-selected" src="assets/images/char4.png" /> ->
+								<img class="thumbnail instruction opponent-selected" src="assets/images/char2.png" /> ->
+								<img class="thumbnail instruction opponent-selectedx" src="assets/images/char1.png" />
+							</p>
+
+					</div>
+				</div>
+		</div>
+	</div>
+	<img src="assets/images/win.png" class="cover cover-hide" />
+	<!-- Copyright
+	<footer class="navbar page-footer text-center navbar-fixed-bottom">
+	    <div class="footer-copyright">
+	        <div class="container-fluid">
+	            <p> &copy; Copyright 2017 Shi-Kwan Tan</p>
+	        </div>
+	    </div>
+	</footer> -->
+
+
+	<!-- jQuery, javascript file for the Bootstrap's javascript file to function -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+	crossorigin="anonymous"></script>
+</body>
+</html>

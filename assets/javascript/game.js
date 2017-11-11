@@ -77,9 +77,12 @@ $(document).ready(function(){
 					opponentCount--;
 					$(opponentID).removeClass("opponent-selected");
 				}else{
-					//only allow three opponents
-					opponentCount++;
-					$(opponentID).addClass("opponent-selected");
+					if($(opponentID).hasClass("opponent-selected") == false){
+						//only allow three opponents
+						opponentCount++;
+						$(opponentID).addClass("opponent-selected");
+					}
+					
 				}
 			}
 		}
@@ -108,7 +111,6 @@ $(document).ready(function(){
 			$("#msg-center").html("Select your favorite hero and lock in!");
 			shake($(this));
 		}
-		
 	});
 
 	$("#btnOpponents").on("click", function(){
@@ -132,7 +134,6 @@ $(document).ready(function(){
 						}
 					$("#msg-center").addClass("alert-success").removeClass("alert-danger");
 					$("#cmdAttack").hide();
-					console.log("log all opponents " + opponents);
 					$("#imgOpponent0").attr("src", "assets/images/" + charList[opponents[0]].img);
 					$("#imgOpponent0").attr("data-value", charList[opponents[0]].id);
 					$("#imgOpponent0").attr("baseHP", charList[opponents[0]].hp);
@@ -175,7 +176,6 @@ $(document).on("click", ".fight-opponent", function(){
 			$(".oppo1_row").hide();
 		}
 		if(counter >= 0) {
-			console.log("counter  back to 2");
 			if(counter == 2){
 				console.log("current opponent ID: " + currentOpponentID);
 				oppoBaseHP = charList[currentOpponentID].hp;
@@ -217,7 +217,6 @@ $("#cmdAttack").on("click", function(){
 	}
 
 	if($.isEmptyObject(currentOpponent) == false){
-		ko($(".fight-scene"));
 		if(currentOpponent.hp <= 0){
 			if(hero.hp >0){
 				koSound.play();
@@ -649,13 +648,7 @@ function shake(idToShake) {
 		$(idToShake).removeClass('shake')
 	}, 0.82 * 1000)
 }
-let previousUse;
-function ko(idtoUse){
-	$(idtoUse).addClass("koBackground");
-	if(idtoUse) clearTimeout(previousUse)
-		previousUse = setTimeout(function(){
-		$(idtoUse).removeClass("koBackground")}, 2*1000)
-}
+
 
 /*
 <a id="hypChar0" href="#" class="thumbnail char" value="0">

@@ -68,6 +68,10 @@ h1{
 	opacity: 1;
 }
 
+#msg-center h1{
+	color: grey;
+}
+
 label.char-name {
 	display: block;
 	text-align: center;
@@ -87,10 +91,17 @@ label.char-name {
 	perspective: 1000px
 }
 
-.koBackground{
-	background: url(../images/ko.gif);
+.thumbnail.instruction {
+	display:inline;
 }
 
+h2.hero {
+	color: green;
+}
+
+h2.opponents{
+	color: red;
+}
 @keyframes shake {
   10%, 90% {
     transform: translate3d(-1px, 0, 0);
